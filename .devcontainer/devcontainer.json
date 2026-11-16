@@ -1,0 +1,19 @@
+{
+  "name": "Booking Platform",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000, 4000],
+  "portsAttributes": {
+    "3000": { "label": "Frontend" },
+    "4000": { "label": "Backend" }
+  },
+  "postCreateCommand": "cp -n backend/.env.example backend/.env && cp -n frontend/.env.example frontend/.env.local && (cd backend && npm ci && npx prisma generate) && (cd frontend && npm ci)",
+  "postStartCommand": "docker compose up -d postgres redis",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "Prisma.prisma", "bradlc.vscode-tailwindcss"]
+    }
+  }
+}
